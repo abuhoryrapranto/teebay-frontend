@@ -2,7 +2,8 @@ import classNames from "classnames"
 
 type Props = {
     name: string,
-    marginTop: string
+    marginTop: string,
+    type?: "button" | "submit"
 }
 
 export default function Button(props : Props) {
@@ -13,7 +14,7 @@ export default function Button(props : Props) {
     );
 
   return (
-    <button className={buttonStyle} type="submit">
+    <button className={buttonStyle} type={props.type}>
         {props.name}
     </button>
   )

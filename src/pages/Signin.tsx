@@ -28,9 +28,9 @@ export default function Signin() {
 
         <Card>
         <form onSubmit={handleSubmit(onSubmit)}>
-            <TextBox type="text" name="email" register={register} registerOption={registerOptionEmail} error={errors.email} placeholder="Email" />
-            <TextBox type="text" name="password" register={register} registerOption={registerOptionPassword} error={errors.password} placeholder="Password" />
-            <Button name="LOGIN" marginTop="mt-[30px]" />
+            <TextBox type="text" name="email" register={register} registerOption={registerOptionEmail} error={errors.email} width="w-80" marginBottom="mb-8" placeholder="Email" />
+            <TextBox type="password" name="password" register={register} registerOption={registerOptionPassword} error={errors.password} width="w-80" placeholder="Password" />
+            <Button name="LOGIN" type="submit" marginTop="mt-[50px]" />
         </form>
             <div className="mt-[20px]">
                 <p>Dont have an account? <Link to="/signup">Signup</Link></p>

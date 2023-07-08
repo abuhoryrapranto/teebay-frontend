@@ -5,7 +5,7 @@ type Props = {
 export default function Card({ children } : Props) {
   return (
     
-        <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-md shadow">
+        <div className="max-w-3xl p-6 bg-white border border-gray-200 rounded-md shadow">
             {children}
         </div>
 

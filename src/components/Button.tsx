@@ -13,7 +13,7 @@ export default function Button(props : Props) {
     );
 
   return (
-    <button className={buttonStyle}>
+    <button className={buttonStyle} type="submit">
         {props.name}
     </button>
   )

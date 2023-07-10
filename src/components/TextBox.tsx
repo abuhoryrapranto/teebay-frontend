@@ -22,7 +22,7 @@ export default function TextBox({type, placeholder, name, register, registerOpti
 
     return (
         <div className={textBoxStyle}>
-            <input type={type} {...register(name, registerOption)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder={placeholder} />
+            <input type={type} {...register(name, registerOption)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder={placeholder}/>
             {error && <p className="text-sm float-left text-red-500">{error?.message}</p>}
             {backendError && <p className="text-sm float-left text-red-500">{backendError}</p>}
         </div>

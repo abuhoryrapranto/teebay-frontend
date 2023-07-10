@@ -1,26 +1,83 @@
+import { useEffect, useState } from "react";
 import Alert from "../components/Alert";
+import Button from "../components/Button";
 import Card from "../components/Card";
 import useFetch from "../hooks/useFetch";
+import { useNavigate } from 'react-router-dom'
+import Modal from "../components/Modal";
+import axios from "axios";
 
 export default function Products() {
 
-  const data = useFetch('http://127.0.0.1:8000/api/v1/product');
+  const [modalOpen, setModalOpen] = useState(false);
+
+  let { data, reload } = useFetch('http://127.0.0.1:8000/api/v1/product');
+
+  const [slug, setSlug] = useState('');
+
+  const navigate = useNavigate();
+
+  const addProduct = () => {
+    navigate('/add-product');
+  }
+
+  const openModal = (slug : string) => {
+    setModalOpen(true);
+    setSlug(slug);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleReload = () => {
+    reload();
+  };
+
+  const deleteProduct = (slug : string) => {
+    axios.delete('http://127.0.0.1:8000/api/v1/product/'+slug, {
+      headers: {
+        "Accept": "application/json",
+        "Authorization": "Bearer "+ localStorage.getItem("token")
+      }
+    })
+    .then(res => {
+      if(res.status === 200) {
+        closeModal();
+        navigate('/products');
+        handleReload();
+        
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  useEffect(() => {
+    
+}, []);
 
   return (
 
-    <div className="container">
+    <div className="">
+
+      <div className="mb-[50px] text-right">
+        <Button type="button" name="Add Product" click={() => addProduct()} />
+        <Button type="button" name="Logout" backgroundColor="bg-red-500 hover:bg-red-600" marginLeft="ml-4" />
+      </div>
 
     <p className="text-2xl font-medium mb-4">MY PRODUCTS</p>
 
       {
         data && data.length > 0 ? data.map((item : any) => (
-          <div className="flex cursor-pointer" key={item.slug}>
+          <div className="cursor-pointer" key={item.slug}>
               <Card size="w-[700px]" marginBottom="mb-4">
                 <div className="float-root">
                   <div className="float-left">
                     <p className="text-gray-700 text-2xl">{item.title}</p>
                   </div>
-                  <div className="float-right cursor-default">
+                  <div className="float-right cursor-default" onClick={() => openModal(item.slug)}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                     </svg>
@@ -44,6 +101,11 @@ export default function Products() {
 
         <Alert type="error" message="No data found" />
       }
+
+      <Modal isOpen={modalOpen} onClose={closeModal} name="Delete Product" click={() => deleteProduct(slug)}>
+        <p className="text-xl">Are you sure you want to delete this product?</p>
+      </Modal>
+
     </div>
   )
 }

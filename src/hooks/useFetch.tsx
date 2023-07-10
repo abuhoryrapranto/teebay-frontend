@@ -41,5 +41,9 @@ export default function useFetch(url : string) {
         
     }, []);
 
-    return data;
+    const reload = () => {
+        getAllData();
+    }
+
+    return { data, reload };
 }

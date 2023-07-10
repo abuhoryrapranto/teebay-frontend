@@ -14,7 +14,7 @@ export default function Products() {
 
       {
         data && data.length > 0 ? data.map((item : any) => (
-          <div className="flex flex-col cursor-pointer" key={item.slug}>
+          <div className="flex cursor-pointer" key={item.slug}>
               <Card size="w-[700px]" marginBottom="mb-4">
                 <div className="float-root">
                   <div className="float-left">

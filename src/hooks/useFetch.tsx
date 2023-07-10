@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import useToken from "./useToken";
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 export default function useFetch(url : string) {
     
     const [data, setData] = useState([]);
 
     const token = useToken();
+
+    const navigate = useNavigate();
 
     const getAllData = () => {
 
@@ -25,7 +28,10 @@ export default function useFetch(url : string) {
         })
         .catch(err => {
 
-            console.log(err);
+            if(err.response.status === 401) {
+
+                navigate('/');
+            }
         })
     }
 

@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function AddProduct() {
 
-    const { register, handleSubmit, trigger, getValues, formState: { errors , isValid } } = useForm();
+    const { register, trigger, getValues, formState: { errors , isValid } } = useForm();
     const [step, setStep] = useState(1);
     const [error, setError] = useState<boolean>(false);
     const [category, setCategory] = useState([]);

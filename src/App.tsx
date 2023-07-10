@@ -5,6 +5,7 @@ import Products from './pages/Products'
 import AddProduct from './pages/AddProduct'
 import { AuthProvider } from './contexts/AuthContext'
 import ProductDetails from './pages/ProductDetails'
+import EditProduct from './pages/EditProduct'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import PrivateRoute from './components/PrivateRoute'
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/products" element={<Products/>} />
                 <Route path="/add-product" element={<AddProduct/>} />
                 <Route path="/product/:slug" element={<ProductDetails/>} />
+                <Route path="/product/edit/:slug" element={<EditProduct/>} />
             </Route>
           </Routes>
         </Router>

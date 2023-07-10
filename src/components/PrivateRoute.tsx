@@ -1,12 +1,9 @@
-import { useContext } from "react"
 import { Navigate, Outlet } from 'react-router-dom';
-import { AuthContext } from "../contexts/AuthContext"
+import useToken from '../hooks/useToken';
 
 export default function PrivateRoute() {
 
-    const { token } =  useContext(AuthContext);
-
-    //const token = localStorage.getItem('token');
+    const token =  useToken();
 
     return(
         

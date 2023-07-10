@@ -82,7 +82,7 @@ export default function Signin() {
             <Button name="LOGIN" type="submit" marginTop="mt-[50px]" />
         </form>
             <div className="mt-[20px]">
-                <p>Dont have an account? <Link to="/products">Signup</Link></p>
+                <p>Dont have an account? <Link to="/signup">Signup</Link></p>
             </div>
         </Card>
     </div>

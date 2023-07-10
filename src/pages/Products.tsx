@@ -54,9 +54,22 @@ export default function Products() {
     })
   }
 
-  useEffect(() => {
+  const productDetails = (slug : string) => {
+
+    axios.put('http://127.0.0.1:8000/api/v1/product/increment-views/'+slug, {}, {
+      headers: {
+        "Accept": "application/json",
+        "Authorization": "Bearer "+ localStorage.getItem("token")
+      }
+    })
+    .then(res => {
+      if(res.status === 200) {
+        navigate('/product/'+slug);
+      }
+    })
+    .catch(err => console.log(err));
     
-}, []);
+  }
 
   return (
 
@@ -71,7 +84,7 @@ export default function Products() {
 
       {
         data && data.length > 0 ? data.map((item : any) => (
-          <div className="cursor-pointer" key={item.slug}>
+          <div className="cursor-pointer" key={item.slug} onClick={() => productDetails(item.slug)}>
               <Card size="w-[700px]" marginBottom="mb-4">
                 <div className="float-root">
                   <div className="float-left">

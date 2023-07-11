@@ -5,19 +5,26 @@ import Button from "../components/Button";
 import Modal from "../components/Modal";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function ProductDetails() {
 
     const [modalOpen, setModalOpen] = useState(false);
+    const [modalNumber, setModalNumber] = useState(0);
 
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date(new Date().getTime()+(5*24*60*60*1000)));
+    
     const { slug } = useParams();
 
     const navigate = useNavigate();
 
     let { data  } : any = useFetch('http://127.0.0.1:8000/api/v1/product/'+slug);
     
-    const openModal = () => {
+    const openModal = (modalNumber : number) => {
         setModalOpen(true);
+        setModalNumber(modalNumber);
     };
     
     const closeModal = () => {
@@ -51,12 +58,28 @@ export default function ProductDetails() {
             <p className="text-md font-medium mt-4 text-gray-500">{data.description}</p>
 
             <div className="float-right mt-[40px]">
-                <Button name="Rent" />
-                <Button name="Buy" marginLeft="ml-4" click={openModal} />
+                <Button name="Rent" click={() => openModal(2)} />
+                <Button name="Buy" marginLeft="ml-4" click={() => openModal(1)} />
             </div>
 
-            <Modal isOpen={modalOpen} onClose={closeModal} name={data.title} click={() => buyProduct()}>
-                <p className="text-xl">Are you sure you want to buy this product?</p>
+            <Modal isOpen={modalOpen} onClose={closeModal} name={data.title} click={() => modalNumber == 1 ? buyProduct() : ''}>
+                {
+                    modalNumber == 1 ? <p className="text-xl">Are you sure you want to buy this product?</p> : 
+                    <div>
+                        <p className="text-2xl font-bold mb-[40px]">Rental period</p>
+                            <div className="grid grid-cols-2 gap-2">
+                            <div>
+                                <p className="text-lg font-semibold p-3">From</p>
+                                <DatePicker dateFormat="dd/MM/yyyy" className="border rounded-md p-3 w-30 ml-3" selected={startDate} placeholderText="Select date" onChange={(date : Date) => setStartDate(date)} />
+                            </div>
+                            <div>
+                                <p className="text-lg font-semibold p-3">To</p>
+                                <DatePicker dateFormat="dd/MM/yyyy" className="border rounded-md p-3 w-30 ml-3" selected={endDate} placeholderText="Select date" onChange={(date : Date) => setEndDate(date)} />
+                            </div>
+                        </div>
+                    </div>
+                    
+                }
             </Modal>
         </div>
         

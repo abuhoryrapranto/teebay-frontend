@@ -77,12 +77,16 @@ export default function Products() {
 
   return (
 
-    <div className="">
-
-      <div className="mb-[50px] text-right">
-        <Button type="button" name="Add Product" click={() => addProduct()} />
-        <Button type="button" name="Logout" backgroundColor="bg-red-500 hover:bg-red-600" marginLeft="ml-4" />
-      </div>
+    <div>
+        <div className="mb-4">
+          <div className="float-left">
+            <Button type="button" name="Orders" click={() => navigate('/orders')} /> 
+            <Button type="button" name="Add Product" click={() => addProduct()} marginLeft="ml-4" /> 
+          </div>
+          <div className="flex justify-end">
+            <Button type="button" name="Logout" backgroundColor="bg-red-500 hover:bg-red-600" />
+          </div>
+        </div>
 
     <p className="text-2xl font-medium mb-4">MY PRODUCTS</p>
 
@@ -92,8 +96,8 @@ export default function Products() {
               <Card size="w-[700px]" marginBottom="mb-4">
 
 
-              <div className="grid grid-cols-2 gap-0">
-                <div onClick={() => productDetails(item.slug)}>
+              <div className="grid grid-cols-5 gap-0">
+                <div className="col-span-4" onClick={() => productDetails(item.slug)}>
                   <div className="float-root">
                     <div className="float-left">
                       <p className="text-gray-700 text-2xl">{item.title}</p>
@@ -111,7 +115,7 @@ export default function Products() {
                   </div>
                 </div>
                 <div>
-                  <div className="float-right cursor-pointer" onClick={() => openModal(item.slug)}>
+                  <div className="float-right cursor-pointer">
 
                     <div className="inline-flex float-right">
                     <p className="mr-4 text-indigo-500" onClick={() => edit(item.slug)}>Edit</p>

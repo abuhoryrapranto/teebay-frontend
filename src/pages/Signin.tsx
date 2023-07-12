@@ -68,7 +68,8 @@ export default function Signin() {
 
   return (
 
-    <div>
+    <div className="flex items-center h-screen">
+        <div className="mx-auto">
         <p className="text-2xl font-medium mb-4">SIGN IN</p>
 
         <Card>
@@ -85,6 +86,7 @@ export default function Signin() {
                 <p>Dont have an account? <Link to="/signup">Signup</Link></p>
             </div>
         </Card>
+        </div>
     </div>
   )
 }

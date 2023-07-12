@@ -118,47 +118,49 @@ export default function EditProduct() {
     }
 
     return (
-        <div>
-            <label className="float-left font-semibold">Title</label>
-            <TextBox type="text" name="title" value={data.title} register={register} registerOption={validation.title} error={errors.title} width="w-[700px]" />
+        <div className="flex items-center h-screen">
+            <div className="mx-auto">
+                <label className="float-left font-semibold">Title</label>
+                <TextBox type="text" name="title" value={data.title} register={register} registerOption={validation.title} error={errors.title} width="w-[700px]" />
 
-            <div className="text-left mt-4">
-                <label className="font-semibold">Categories</label>
-            </div>
-            <div className="">
-            <Select isMulti={true} key={data.category_with_id} defaultValue={data.category_with_id} options={options} onChange={categoryChange} />
-            {error && <p className="mb-[40px] text-sm text-red-500">Category is required</p>}
-            </div>
-
-            <label className="float-left mt-[40px] font-semibold">Description</label>
-            <textarea {...register("description", {required: "Description is required"})} rows={4} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Description">{data.description}</textarea>
-            {errors.description && <p className="text-sm text-red-500 text-left">{errors.description?.message?.toString()}</p>}
-
-            <div className="grid gap-6 md:grid-cols-3 mt-[40px]">
-                    <div className="text-left">
-                        <label className="font-semibold">Price</label>
-                        <TextBox type="number" name="purchase_price" value={data.purchase_price} register={register} registerOption={validation.purchase_price} error={errors.purchase_price} />
-                    </div>
-                    <div className="text-left">
-                        <label className="font-semibold">Rent</label>
-                        <TextBox type="number" name="rent_price" value={data.rent_price}  register={register} registerOption={validation.rent_price} error={errors.rent_price} marginBottom="mb-8" placeholder="Rent price" />
-                    </div>
-                    <div>
-                    <label className="font-semibold float-left">Rent option</label>
-                    <select id="countries" {...register("rent_option")} className="h-[45px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 w-full">
-                        <option selected value={data.rent_option}>per {data.rent_option}</option>
-                        <option value="hour">hour</option>
-                        <option value="day">day</option>
-                        <option value="month">month</option>
-                        <option value="year">year</option>
-                    </select>
-                    {errors.rent_option && <p className="text-sm text-red-500">{errors.rent_option?.message?.toString()}</p>}
-                    </div>
+                <div className="text-left mt-4">
+                    <label className="font-semibold">Categories</label>
+                </div>
+                <div className="">
+                <Select isMulti={true} key={data.category_with_id} defaultValue={data.category_with_id} options={options} onChange={categoryChange} />
+                {error && <p className="mb-[40px] text-sm text-red-500">Category is required</p>}
                 </div>
 
-                <div className="float-right">
-                    <Button name="Edit Product" click={updateProduct} />
-                </div>
+                <label className="float-left mt-[40px] font-semibold">Description</label>
+                <textarea {...register("description", {required: "Description is required"})} rows={4} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Description">{data.description}</textarea>
+                {errors.description && <p className="text-sm text-red-500 text-left">{errors.description?.message?.toString()}</p>}
+
+                <div className="grid gap-6 md:grid-cols-3 mt-[40px]">
+                        <div className="text-left">
+                            <label className="font-semibold">Price</label>
+                            <TextBox type="number" name="purchase_price" value={data.purchase_price} register={register} registerOption={validation.purchase_price} error={errors.purchase_price} />
+                        </div>
+                        <div className="text-left">
+                            <label className="font-semibold">Rent</label>
+                            <TextBox type="number" name="rent_price" value={data.rent_price}  register={register} registerOption={validation.rent_price} error={errors.rent_price} marginBottom="mb-8" placeholder="Rent price" />
+                        </div>
+                        <div>
+                        <label className="font-semibold float-left">Rent option</label>
+                        <select id="countries" {...register("rent_option")} className="h-[45px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 w-full">
+                            <option selected value={data.rent_option}>per {data.rent_option}</option>
+                            <option value="hour">hour</option>
+                            <option value="day">day</option>
+                            <option value="month">month</option>
+                            <option value="year">year</option>
+                        </select>
+                        {errors.rent_option && <p className="text-sm text-red-500">{errors.rent_option?.message?.toString()}</p>}
+                        </div>
+                    </div>
+
+                    <div className="float-right">
+                        <Button name="Edit Product" click={updateProduct} />
+                    </div>
+            </div>
         </div>
     )
 }

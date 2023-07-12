@@ -224,14 +224,16 @@ export default function AddProduct() {
 
 
   return (
-        <div>
-            {renderForms()}
+        <div className="flex items-center h-screen">
+            <div className="mx-auto">
+                {renderForms()}
 
-            
-            {step > 0 && step !== 1 ? <Button name="Back" float="float-left" click={() => previos()} /> : ''}
-            {step < 5 ? <Button name="Next" float="float-right" click={() => next()} /> : <Button name="Submit" float="float-left" marginLeft="ml-[300px]" click={submitData} />}
-            
-            
+                
+                {step > 0 && step !== 1 ? <Button name="Back" float="float-left" click={() => previos()} /> : ''}
+                {step < 5 ? <Button name="Next" float="float-right" click={() => next()} /> : <Button name="Submit" float="float-left" marginLeft="ml-[300px]" click={submitData} />}
+                
+                
+            </div>
         </div>
   )
 }

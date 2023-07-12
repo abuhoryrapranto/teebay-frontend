@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Alert from "../components/Alert";
 
 export default function ProductDetails() {
 
@@ -15,10 +16,14 @@ export default function ProductDetails() {
 
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date(new Date().getTime()+(5*24*60*60*1000)));
+
+    const [success, setSuccess] = useState("");
     
     const { slug } = useParams();
 
     const navigate = useNavigate();
+
+    const delay = (ms : any) => new Promise(res => setTimeout(res, ms));
 
     let { data  } : any = useFetch('http://127.0.0.1:8000/api/v1/product/'+slug);
     
@@ -44,7 +49,12 @@ export default function ProductDetails() {
         })
         .then(res => {
             if(res.status === 201) {
-                navigate('/products');
+                closeModal();
+                let message = `Order Buy successfully from ${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()}.`;
+                setSuccess(message);
+                setTimeout(() => {
+                    navigate('/products');
+                }, 3000);
             }
         })
         .catch(err => console.log(err));
@@ -68,13 +78,23 @@ export default function ProductDetails() {
         })
         .then(res => {
             if(res.status === 201) {
-                navigate('/products');
+                closeModal();
+                let message = `Order Rent successfully from ${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()}.`;
+                setSuccess(message);
+                setTimeout(() => {
+                    navigate('/products');
+                }, 3000);
             }
         })
         .catch(err => console.log(err));
     }
 
     return (
+        <div className="flex items-center h-screen">
+        <div className="mx-auto">
+            {
+                success.length !== 0 ? <Alert type="success" message={success} /> : ""
+            }
         <div className="text-left">
             <p className="text-3xl font-semibold">{data.title}</p>
             <p className="text-md font-medium mt-4 text-gray-500">Categories: {data.category}</p>
@@ -105,6 +125,8 @@ export default function ProductDetails() {
                     
                 }
             </Modal>
+        </div>
+        </div>
         </div>
         
     )

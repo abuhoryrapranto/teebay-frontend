@@ -85,7 +85,8 @@ export default function Signup() {
 
   return (
 
-    <div>
+    <div className="flex items-center h-screen">
+        <div className="mx-auto">
         <p className="text-2xl font-medium mb-4">SIGN UP</p>
     
         <Card>
@@ -117,6 +118,7 @@ export default function Signup() {
             </div>
 
         </Card>
+        </div>
     </div>
   )
 }

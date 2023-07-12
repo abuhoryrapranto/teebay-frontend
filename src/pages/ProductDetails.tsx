@@ -50,6 +50,30 @@ export default function ProductDetails() {
         .catch(err => console.log(err));
     }
 
+    const rentProduct = () => {
+
+        let from = startDate.toISOString().split('T')[0];
+        let to = endDate.toISOString().split('T')[0];
+
+        axios.post("http://127.0.0.1:8000/api/v1/order", {
+            slug: slug,
+            type: "rent",
+            rent_from: from,
+            rent_to: to
+        }, {
+            headers: {
+                "Accept": "application/json",
+                "Authorization": "Bearer "+ localStorage.getItem("token")
+            }
+        })
+        .then(res => {
+            if(res.status === 201) {
+                navigate('/products');
+            }
+        })
+        .catch(err => console.log(err));
+    }
+
     return (
         <div className="text-left">
             <p className="text-3xl font-semibold">{data.title}</p>
@@ -62,7 +86,7 @@ export default function ProductDetails() {
                 <Button name="Buy" marginLeft="ml-4" click={() => openModal(1)} />
             </div>
 
-            <Modal isOpen={modalOpen} onClose={closeModal} name={data.title} click={() => modalNumber == 1 ? buyProduct() : ''}>
+            <Modal isOpen={modalOpen} onClose={closeModal} name={data.title} click={() => modalNumber == 1 ? buyProduct() : rentProduct()}>
                 {
                     modalNumber == 1 ? <p className="text-xl">Are you sure you want to buy this product?</p> : 
                     <div>

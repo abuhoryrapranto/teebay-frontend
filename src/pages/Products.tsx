@@ -6,6 +6,7 @@ import useFetch from "../hooks/useFetch";
 import { Link, useNavigate } from 'react-router-dom'
 import Modal from "../components/Modal";
 import axios from "axios";
+import LongText from "../components/LongText";
 
 export default function Products() {
 
@@ -97,18 +98,21 @@ export default function Products() {
 
 
               <div className="grid grid-cols-5 gap-0">
-                <div className="col-span-4" onClick={() => productDetails(item.slug)}>
-                  <div className="float-root">
-                    <div className="float-left">
-                      <p className="text-gray-700 text-2xl">{item.title}</p>
+                <div className="col-span-4">
+                  <div onClick={() => productDetails(item.slug)}>
+                    <div className="float-root">
+                      <div className="float-left">
+                        <p className="text-gray-700 text-2xl">{item.title}</p>
+                      </div>
+                    </div>
+                    <br/>
+                    <div className="text-left mt-4">
+                      <p className="text-gray-500 text-sm font-medium mt-2">Categories: {item.category}</p>
+                      <p className="text-gray-500 text-sm font-medium mt-2">Price: ${item.purchase_price} | Rent: ${item.rent_price} {item.rent_option}</p>
+                      
                     </div>
                   </div>
-                  <br/>
-                  <div className="text-left mt-4">
-                    <p className="text-gray-500 text-sm font-medium mt-2">Categories: {item.category}</p>
-                    <p className="text-gray-500 text-sm font-medium mt-2">Price: ${item.purchase_price} | Rent: ${item.rent_price} {item.rent_option}</p>
-                    <p className="text-gray-800 text-sm font-medium mt-2">{item.description}</p>
-                  </div>
+                  <LongText text={item.description} maxLength={200} click={() => productDetails(item.slug)} />
                   <div className="float-root mt-4">
                   <p className="text-gray-500 text-sm font-medium float-left">Date posted: {item.posted_date}</p>
                   

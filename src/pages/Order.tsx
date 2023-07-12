@@ -3,6 +3,7 @@ import { useState } from "react";
 import useFetch from "../hooks/useFetch";
 import Card from "../components/Card";
 import Alert from "../components/Alert";
+import LongText from "../components/LongText";
 
 export default function Orders() {
     const [openTab, setOpenTab] = useState(1);
@@ -41,7 +42,7 @@ export default function Orders() {
                         <div className={openTab === 1 ? "block" : "hidden"}>
                             {
                                 buy && buy.map((item : any) => (
-                                    <Card size="w-[700px]" marginBottom="mb-4">
+                                    <Card size="w-[700px]" marginBottom="mb-4" key={item.slug}>
                                         <div className="">
                                             <div className="float-root">
                                                 <div className="float-left">
@@ -52,7 +53,7 @@ export default function Orders() {
                                             <div className="text-left mt-4">
                                                 <p className="text-gray-500 text-sm font-medium mt-2">Categories: {item.category}</p>
                                                 <p className="text-gray-500 text-sm font-medium mt-2">Price: ${item.purchase_price}</p>
-                                                <p className="text-gray-800 text-sm font-medium mt-2">{item.description}</p>
+                                                <LongText text={item.description} maxLength={200} />
                                             </div>
                                         </div>
                                     </Card>
@@ -65,7 +66,7 @@ export default function Orders() {
                         <div className={openTab === 3 ? "block" : "hidden"}>
                         {
                                 rent && rent.map((item : any) => (
-                                    <Card size="w-[700px]" marginBottom="mb-4">
+                                    <Card size="w-[700px]" marginBottom="mb-4" key={item.slug}>
                                         <div className="">
                                             <div className="float-root">
                                                 <div className="float-left">
@@ -76,7 +77,7 @@ export default function Orders() {
                                             <div className="text-left mt-4">
                                                 <p className="text-gray-500 text-sm font-medium mt-2">Categories: {item.category}</p>
                                                 <p className="text-gray-500 text-sm font-medium mt-2">Rent: ${item.rent_price} {item.rent_option}</p>
-                                                <p className="text-gray-800 text-sm font-medium mt-2">{item.description}</p>
+                                                <LongText text={item.description} maxLength={200} />
                                                 <p className="text-gray-800 text-sm font-medium mt-2"> Rent from {item.rent_from} to {item.rent_to}</p>
                                             </div>
                                         </div>

@@ -114,10 +114,10 @@ export default function Signup() {
 
                 <TextBox type="password" name="password" register={register} error={errors.password} registerOption={validation.password} marginBottom="mb-8" placeholder="Password" />
                 <TextBox type="password" name="password_confirmation" register={register} error={errors.password_confirmation} registerOption={validation.password_confirmation}  placeholder="Confirm Password" />
-
+                <br />
                 {
                     loading ? <SpinnerButton name="Loading..." marginTop="mt-[30px]" /> :
-                    <Button name="LOGIN" type="submit" marginTop="mt-[30px]" />
+                    <Button name="SIGN UP" type="submit" marginTop="mt-[30px]" />
                 }
                 
             </form>

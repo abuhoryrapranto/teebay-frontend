@@ -27,6 +27,7 @@ function App() {
                 <Route path="/product/edit/:slug" element={<EditProduct/>} />
                 <Route path="/orders" element={<Order/>} />
             </Route>
+            <Route path='*' element={<Signin/>} />
           </Routes>
         </Router>
       </AuthProvider>

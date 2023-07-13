@@ -76,6 +76,11 @@ export default function Products() {
     navigate('/product/edit/'+slug)
   }
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate('/');
+  }
+
   return (
 
     <div>
@@ -85,7 +90,7 @@ export default function Products() {
             <Button type="button" name="Add Product" click={() => addProduct()} marginLeft="ml-4" /> 
           </div>
           <div className="flex justify-end">
-            <Button type="button" name="Logout" backgroundColor="bg-red-500 hover:bg-red-600" />
+            <Button type="button" name="Logout" backgroundColor="bg-red-500 hover:bg-red-600" click={logout} />
           </div>
         </div>
 

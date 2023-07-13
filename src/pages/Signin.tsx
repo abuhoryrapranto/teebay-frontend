@@ -80,7 +80,10 @@ export default function Signin() {
         <form onSubmit={handleSubmit(onSubmit)}>
             <TextBox type="text" name="email" register={register} registerOption={validation.email} error={errors.email} backendError={backendErrors?.email} width="w-80" marginBottom="mb-8" placeholder="Email" />
             <TextBox type="password" name="password" register={register} registerOption={validation.password} error={errors.password} backendError={backendErrors?.password} width="w-80" placeholder="Password" />
-            <Button name="LOGIN" type="submit" marginTop="mt-[50px]" />
+            <div>
+                <br />
+            <Button name="LOGIN" type="submit" marginTop="mt-[30px]" />
+            </div>
         </form>
             <div className="mt-[20px]">
                 <p>Dont have an account? <Link to="/signup">Signup</Link></p>

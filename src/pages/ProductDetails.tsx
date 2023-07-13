@@ -50,7 +50,7 @@ export default function ProductDetails() {
         .then(res => {
             if(res.status === 201) {
                 closeModal();
-                let message = `Order Buy successfully from ${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()}.`;
+                let message = "Order Buy successfully";
                 setSuccess(message);
                 setTimeout(() => {
                     navigate('/products');

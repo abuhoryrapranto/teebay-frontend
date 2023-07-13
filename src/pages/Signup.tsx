@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Alert from "../components/Alert";
+import SpinnerButton from "../components/SpinnerButton";
 
 type FormData = {
     first_name: string,
@@ -23,20 +24,24 @@ export default function Signup() {
 
     const [backendErrors, setBackendErrors] = useState<any>(null);
     const [success, setSuccess] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     //const onSubmit = (data : any) => console.log(data);
     const onSubmit = async (data : FormData) => {
+        setLoading(true);
         axios.post('http://127.0.0.1:8000/api/v1/auth/register', data)
             .then(res => {
                 if(res.status === 201) {
                     reset();
                     setBackendErrors(null);
+                    setLoading(false);
                     setSuccess(true);
                 }
             })
             .catch(err => {
                 if(err.response.data.errors) {
                     setBackendErrors(err.response.data.errors);
+                    setLoading(false);
                 }
             })
             console.log(backendErrors);
@@ -91,7 +96,7 @@ export default function Signup() {
     
         <Card>
             {
-                success && <Alert message="Successfully Signup" />
+                success && <Alert type="success" message="Successfully Signup. Please check you email for verification." />
                 
             }
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -110,7 +115,11 @@ export default function Signup() {
                 <TextBox type="password" name="password" register={register} error={errors.password} registerOption={validation.password} marginBottom="mb-8" placeholder="Password" />
                 <TextBox type="password" name="password_confirmation" register={register} error={errors.password_confirmation} registerOption={validation.password_confirmation}  placeholder="Confirm Password" />
 
-                <Button name="LOGIN" type="submit" marginTop="mt-[30px]" />
+                {
+                    loading ? <SpinnerButton name="Loading..." marginTop="mt-[30px]" /> :
+                    <Button name="LOGIN" type="submit" marginTop="mt-[30px]" />
+                }
+                
             </form>
 
             <div className="mt-[20px]">

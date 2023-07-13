@@ -114,7 +114,6 @@ export default function Products() {
                     <div className="text-left mt-4">
                       <p className="text-gray-500 text-sm font-medium mt-2">Categories: {item.category}</p>
                       <p className="text-gray-500 text-sm font-medium mt-2">Price: ${item.purchase_price} | Rent: ${item.rent_price} {item.rent_option}</p>
-                      
                     </div>
                   </div>
                   <LongText text={item.description} maxLength={200} click={() => productDetails(item.slug)} />
